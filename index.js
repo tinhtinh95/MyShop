@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
-import App from './src/App';
+import Root from './srcnhap/Root';
 
-AppRegistry.registerComponent('MyShop', () => App);
+AppRegistry.registerComponent('MyShop', () => Root);
