@@ -17,7 +17,13 @@ const DrawerMain=DrawerNavigator({
   Info:{screen: Info},
   OrderHistory:{screen: OrderHistory},
   Auth:{screen: Auth},
-})
+  
+},
+// {
+//     // backgroundColor: '#34B080'
+ 
+// }
+)
 
 
 export default class App extends React.Component {
@@ -26,7 +32,9 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <DrawerMain/>
+      <View style={{flex:1,}}>
+        <DrawerMain/>
+      </View>
     );
   }
 }
