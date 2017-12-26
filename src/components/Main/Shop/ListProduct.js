@@ -16,7 +16,7 @@ import { mam } from "../../../img/mam.jpg";
 
 const { height, width } = Dimensions.get('window');
 
-const imgWidth = width/2 ;
+const imgWidth = width / 2;
 const imgHeight = (imgWidth / 225) * 225;
 const productWidth = (width - 50) / 2;
 const productHeight = (productWidth * 745) / 556;
@@ -38,16 +38,16 @@ class ListItem extends React.Component {
 
 export default class List extends React.Component {
   render() {
-    const {goBack}=this.props.navigation;
+    const { goBack } = this.props.navigation;
     return (
-      <View style={styles.wrapper}>
+      <ScrollView style={styles.wrapper}>
         <View style={{ flexDirection: 'row' }}>
-         <TouchableOpacity onPress={()=>goBack()}>
-         <Image
-            style={{ width: 40, height: 40 }}
-            source={require('../../../media/appIcon/backList.png')}
-          />
-         </TouchableOpacity>
+          <TouchableOpacity onPress={() => goBack()}>
+            <Image
+              style={{ width: 40, height: 40 }}
+              source={require('../../../media/appIcon/backList.png')}
+            />
+          </TouchableOpacity>
           <Text style={styles.textStyle}>List</Text>
         </View>
         <View>
@@ -59,33 +59,59 @@ export default class List extends React.Component {
           // keyExtractor={({item,index})=>index}
           ></FlatList> */}
           <View style={{
-            paddingTop:10,
-            paddingBottom:10,
-            flexDirection:'row',
-            borderTopWidth:1
-            }}>
-            <View><Image 
-            style={{
-              width:imgWidth, height:imgHeight
-            }}
-            source={require('../../../img/mam1.jpg')} /></View>
-            <View style={{marginLeft:width/8, justifyContent:'flex-end'}}>
-              <Text style={{
-                fontSize:20,
-                color:'black'
-              }}>Name</Text>
-              <View style={{flexDirection:'row',}}><Text style={{color:'black'}}>Price:</Text><Text 
+            paddingTop: 10,
+            paddingBottom: 10,
+            flexDirection: 'row',
+            borderTopWidth: 1
+          }}>
+            <View><Image
               style={{
-                color:'pink'
-              }}>$4</Text></View>
+                width: imgWidth, height: imgHeight
+              }}
+              source={require('../../../img/mam1.jpg')} /></View>
+            <View style={{ marginLeft: width / 8, justifyContent: 'flex-end' }}>
               <Text style={{
-                color:'blue'
+                fontSize: 20,
+                color: 'black'
+              }}>Name</Text>
+              <View style={{ flexDirection: 'row', }}><Text style={{ color: 'black' }}>Price:</Text><Text
+                style={{
+                  color: 'purple'
+                }}>$4</Text></View>
+              <TouchableOpacity onPress={()=>this.props.navigation.navigate('Detail')}><Text style={{
+                color: 'blue'
+              }}>Detail</Text></TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={{
+            paddingTop: 10,
+            paddingBottom: 10,
+            flexDirection: 'row',
+            borderTopWidth: 1
+          }}>
+            <View><Image
+              style={{
+                width: imgWidth, height: imgHeight
+              }}
+              source={require('../../../img/mam1.jpg')} /></View>
+            <View style={{ marginLeft: width / 8, justifyContent: 'flex-end' }}>
+              <Text style={{
+                fontSize: 20,
+                color: 'black'
+              }}>Name</Text>
+              <View style={{ flexDirection: 'row', }}><Text style={{ color: 'black' }}>Price:</Text><Text
+                style={{
+                  color: 'purple'
+                }}>$4</Text></View>
+              <Text style={{
+                color: 'blue'
               }}>Detail</Text>
             </View>
           </View>
-          
+
         </View>
-      </View>
+      </ScrollView>
 
 
     );

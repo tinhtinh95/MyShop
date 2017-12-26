@@ -18,17 +18,17 @@ class Auth extends React.Component {
   render() {
     const SignIn = (
       <View style={styles.form}>
-        <TextInput style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your username' />
-        <TextInput style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your password' />
+        <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your username' />
+        <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your password' />
         <TouchableOpacity style={styles.btnSubmit}><Text style={styles.boldText}>Submit</Text></TouchableOpacity>
       </View>
     )
     const SignUp = (
       <View style={styles.form}>
-        <TextInput style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your email' />
-        <TextInput style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your username' />
-        <TextInput style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your password' />
-        <TextInput style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Re-enter your password' />
+        <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your email' />
+        <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your username' />
+        <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your password' />
+        <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Re-enter your password' />
         <TouchableOpacity style={styles.btnSubmit}><Text style={styles.boldText}>Submit</Text></TouchableOpacity>
       </View>
     )
@@ -45,7 +45,7 @@ class Auth extends React.Component {
           />
         </View>
         <View style={styles.header}>
-          <TouchableOpacity onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
+          <TouchableOpacity style={{paddingTop:10}} onPress={()=>this.props.navigation.navigate('DrawerOpen')}>
             <Image style={styles.backHeader} source={require('../../media/appIcon/back.png')} />
           </TouchableOpacity>
           <Text style={styles.titleHeader}>{title}</Text>
@@ -81,11 +81,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 40,
     width: width * 0.8,
-    fontWeight: 'bold',
-    color: 'black',
+    // fontWeight: 'bold',
+    // color: 'black',
     marginBottom: 10,
     borderColor: 'black',
-    borderRadius: 20
+    borderRadius: 20,
+    backgroundColor:'#fff'
   },
   imgContainer: {
     flex: 1,
@@ -99,10 +100,11 @@ const styles = StyleSheet.create({
     height: null,
   },
   header: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    // padding:10
   },
   backHeader: {
-    width: 40, height: 40
+    width: 35, height: 35,
   },
   titleHeader: {
     color: 'black',

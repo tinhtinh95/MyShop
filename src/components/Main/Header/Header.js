@@ -27,7 +27,7 @@ export default class Header extends React.Component {
           </TouchableOpacity>
         </View>
         <View style={styles.bottom}>
-          <TextInput placeholder="What do you want to buy?" style={styles.inputStyle} />
+          <TextInput  underlineColorAndroid='transparent' placeholder="What do you want to buy?" style={styles.inputStyle} />
         </View>
       </View>
     );
@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 5,
     height: 40,
-    fontSize: 15
+    fontSize: 15,
+   
   },
   textStyle: {
     justifyContent: 'center',
