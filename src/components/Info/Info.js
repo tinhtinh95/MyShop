@@ -28,15 +28,15 @@ class Ex extends React.Component{
 }
 export default class Info extends React.Component {
 
-  // _onOpen=()=>{
-  //   this.props.navigation.navigate('DrawerOpen')
-  //   // alert("ahihi")
-  // }
+  _onOpen=()=>{
+    // this.props.navigation.navigate('DrawerOpen')
+    alert("ahihi")
+  }
 
   render() {
     return (
-      // <Ex open={this._onOpen} />
-      <Ex/>
+      <Ex open={this._onOpen} />
+      // <Ex/>
     );
   }
 }
