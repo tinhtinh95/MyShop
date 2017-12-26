@@ -8,24 +8,82 @@ import {
   Dimensions,
   Image,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  FlatList
 } from 'react-native';
 import { mam } from "../../../img/mam.jpg";
 
 
 const { height, width } = Dimensions.get('window');
 
-const imgWidth = width - 40;
-const imgHeight = (imgWidth / 1296) * 899 * 0.9;
-const productWidth=(width-50)/2;
-const productHeight=(productWidth*745)/556;
+const imgWidth = width/2 ;
+const imgHeight = (imgWidth / 225) * 225;
+const productWidth = (width - 50) / 2;
+const productHeight = (productWidth * 745) / 556;
+
+class ListItem extends React.Component {
+  render() {
+    return (
+      <View>
+        <View><Image source={require('../../../img/mam1.jpg')} /></View>
+        <View>
+          <Text>Name</Text>
+          <Text>Price</Text>
+          <Text>Detail</Text>
+        </View>
+      </View>
+    )
+  }
+}
 
 export default class List extends React.Component {
   render() {
+    const {goBack}=this.props.navigation;
     return (
       <View style={styles.wrapper}>
-        <View>
+        <View style={{ flexDirection: 'row' }}>
+         <TouchableOpacity onPress={()=>goBack()}>
+         <Image
+            style={{ width: 40, height: 40 }}
+            source={require('../../../media/appIcon/backList.png')}
+          />
+         </TouchableOpacity>
           <Text style={styles.textStyle}>List</Text>
+        </View>
+        <View>
+          {/* <FlatList
+          data={[
+            {key:'a'},{key:'b'}
+          ]}
+          renderItem={({item})=><Text>{item.key}</Text>}
+          // keyExtractor={({item,index})=>index}
+          ></FlatList> */}
+          <View style={{
+            paddingTop:10,
+            paddingBottom:10,
+            flexDirection:'row',
+            borderTopWidth:1
+            }}>
+            <View><Image 
+            style={{
+              width:imgWidth, height:imgHeight
+            }}
+            source={require('../../../img/mam1.jpg')} /></View>
+            <View style={{marginLeft:width/8, justifyContent:'flex-end'}}>
+              <Text style={{
+                fontSize:20,
+                color:'black'
+              }}>Name</Text>
+              <View style={{flexDirection:'row',}}><Text style={{color:'black'}}>Price:</Text><Text 
+              style={{
+                color:'pink'
+              }}>$4</Text></View>
+              <Text style={{
+                color:'blue'
+              }}>Detail</Text>
+            </View>
+          </View>
+          
         </View>
       </View>
 
@@ -50,6 +108,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 20,
     color: "#Afafaf",
+    marginLeft: width / 3,
     // marginBottom: 20
   },
   textImg: {
@@ -57,11 +116,11 @@ const styles = StyleSheet.create({
     height: imgHeight,
     // position: 'absolute'
   },
-  textName:{
+  textName: {
     fontSize: 15,
     color: "#accaca",
   },
-  textPrice:{
+  textPrice: {
     fontSize: 15,
     color: "purple",
   }
