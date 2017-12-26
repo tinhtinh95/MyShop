@@ -14,8 +14,8 @@ import OrderHistory from './components/OrderHistory/OrderHistory';
 
 const DrawerMain=DrawerNavigator({
   Home:{screen: Main},
-  // Info:{screen: Info},
-  // OrderHistory:{screen: OrderHistory},
+  Info:{screen: Info},
+  OrderHistory:{screen: OrderHistory},
   Auth:{screen: Auth},
   
 },

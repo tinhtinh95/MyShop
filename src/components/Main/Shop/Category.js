@@ -21,7 +21,7 @@ export default class Category extends React.Component {
         <View style={{ flex: 1 }}><Text style={styles.textStyle}>Category</Text></View>
         <View style={{ flex: 4 }}>
           <Swiper>
-            <TouchableOpacity onPress={()=> alert("hahihi")} style={{flex:1,position: 'absolute', }} >
+            <TouchableOpacity onPress={this.props.gotoList} style={{flex:1,position: 'absolute', }} >
               <View style={{ position: 'absolute' }}>
                 <Image source={require('../../../img/mam.jpg')}
                   style={styles.textImg}>
