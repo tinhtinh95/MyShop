@@ -3,8 +3,15 @@ import {
     View, Text, StyleSheet, Image, Dimensions, ScrollView, TouchableOpacity 
 } from 'react-native';
 
+// import img1 from '../../../../media/temp/sp5.jpeg';
+// import img2 from '../../../../media/temp/sp4.jpeg';
+
+// const back = require('../../../../media/appIcon/back.png');
+// const cart = require('../../../../media/appIcon/cartfull.png');
+
+
+
 export default class ProductDetail extends Component {
-   
     render() {
         const {
             wrapper, cardStyle, header,
@@ -13,38 +20,39 @@ export default class ProductDetail extends Component {
             textSmoke, textHighlight, textMain, titleContainer,
             descContainer, productImageStyle, descStyle, txtMaterial, txtColor
         } = styles;
+        const {goBack}= this.props.navigation;
         return (
             <View style={wrapper}>
                 <View style={cardStyle}>
                     <View style={header}>
-                        <TouchableOpacity onPress={()=>{}}>
+                        <TouchableOpacity onPress={()=>goBack()}>
                             <Image style={backStyle} source={require('../../../media/appIcon/back.png')} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{}}>
-                            <Image style={cartStyle} source={require('../../../media/appIcon/cart.png')} />
+                        <TouchableOpacity>
+                            <Image style={cartStyle} source={require('../../../media/appIcon/cartfull.png')} />
                         </TouchableOpacity>
                     </View>
                     <View style={imageContainer}>
                         <ScrollView style={{ flexDirection: 'row', padding: 10, height: swiperHeight }} horizontal >
-                            {/* <Image source={{ req }} style={productImageStyle} />
-                            <Image source={{ uri: `${url}${images[1]}` }} style={productImageStyle} /> */}
+                            <Image source={require('../../../img/muc3.jpg')} style={productImageStyle} />
+                            <Image source={require('../../../img/muc3.jpg')} style={productImageStyle} />
                         </ScrollView>
                     </View>
                     <View style={footer}>
                         <View style={titleContainer}>
                             <Text style={textMain}>
-                                <Text style={textBlack}>ahihi</Text>
+                                <Text style={textBlack}>{'back of the'.toUpperCase()}</Text>
                                 <Text style={textHighlight}> / </Text>
-                                <Text style={textSmoke}>5$</Text>
+                                <Text style={textSmoke}>100$</Text>
                             </Text>
                         </View>
                         <View style={descContainer}>
-                            <Text style={descStyle}></Text>
+                            <Text style={descStyle}>A delicate layer of eyelash lace brings dreamy elegance to this piece, while smooth, lightweight lining feels luxurious against your skin. We love it with heels for a look that fits in on date night, or with cool booties to add an edge.</Text>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 15 }}>
-                                <Text style={txtMaterial}>Material </Text>
+                                <Text style={txtMaterial}>Material Fur</Text>
                                 <View style={{ flexDirection: 'row' }} >
-                                    <Text style={txtColor}>Color</Text>
-                                    <View style={{ height: 15, width: 15, backgroundColor: 'green', borderRadius: 15, marginLeft: 10, borderWidth: 1, borderColor: '#C21C70' }} />
+                                    <Text style={txtColor}>Color Black</Text>
+                                    <View style={{ height: 15, width: 15, backgroundColor: 'black'.toLowerCase(), borderRadius: 15, marginLeft: 10, borderWidth: 1, borderColor: '#C21C70' }} />
                                 </View>
                             </View>
                         </View>
@@ -62,7 +70,7 @@ const swiperHeight = (swiperWidth * 452) / 361;
 const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
-        backgroundColor: '#D6D6D6',
+        backgroundColor: '#cacaca',
     },
     cardStyle: {
         flex: 1,
