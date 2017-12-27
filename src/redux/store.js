@@ -1,23 +1,55 @@
 import App from '../App';
-import {createStore} from 'redux';
+import { createStore } from 'redux';
 
 
-const defaulState={
-    isSignIn:true,
+
+var defaultState = {
+    isSignIn: true,
+    arrCat:[{id:11110}]
 }
 
-const reducer=(state=defaulState, action)=>{
-    switch(action.type){
+const reducer = (state = defaultState, action) => {
+    switch (action.type) {
         case 'TOGGLE_SIGNIN':
-        return{
-            ...state,
-            isSignIn:!state.isSignIn,
+            return {
+                ...state,
+                isSignIn: !state.isSignIn,
+            }
+        case 'GET_API': {
+            var newArr=[];
+            // fetchData = () => {
+                fetch('http://localhost/api/')
+                    .then((response) => response.json())
+                    .then((responseJson) => {
+                        state.arrCat=responseJson.type;
+                        console.log(newArr);
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            // }
+            
+            return {
+                ...state,
+                arrCat:[fetch('http://localhost/api/')
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    return responseJson.type;
+                    // console.log(newArr);
+                })]
+                // .catch((error) => {
+                //     console.error(error);
+                // }),
+                // arrCat:{arrCat},
+            }
+            // alert(arrCat)
         }
         default:
-        return state;
+            return state;
     }
 }
-const store=createStore(reducer);
+const store = createStore(reducer);
+// store.dispatch({type: 'GET_API'});
 export default store;
 
 

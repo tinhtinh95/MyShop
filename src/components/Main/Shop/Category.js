@@ -8,19 +8,51 @@ import {
   Dimensions,
   Image,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,FlatList
 } from 'react-native';
 import { mam } from "../../../img/mam.jpg";
+import {connect} from 'react-redux';
 
 
-export default class Category extends React.Component {
+class Category extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+        data:[],
+    }
+  }
+  // componentDidMount(){
+  //   fetch('http://localhost/api/')
+  //   .then((response) => response.json())
+  //   .then((responseJson) => {
+  //     this.setState({data: responseJson.type});
+  //   })
+  //   .catch((error) => {
+  //       console.error(error);
+  //   });
+  // }
   render() {
+    // const listCat=this.props.arrCat;
+    const {isSignIn,arrCat}=this.props;
+    // alert(arrCat);
+    // alert(isSignIn);
+    // alert(`state send to task list =${JSON.stringify(arrCat)} `);
+    // alert(arrCat);
+    // console.log(arrCat.id)
     return (
       // <View></View>
       <View style={styles.wrapper}>
         <View style={{ flex: 1 }}><Text style={styles.textStyle}>Category</Text></View>
         <View style={{ flex: 4 }}>
+        <FlatList
+        data={arrCat}
+        keyExtractor={(item, index)=>index}
+        renderItem={({item})=><Text>{item.id}</Text>}
+        >
+
+        </FlatList>
           <Swiper>
+            {/* {arrCat.map(e=>( */}
             <TouchableOpacity onPress={this.props.gotoList} style={{flex:1,position: 'absolute', }} >
               <View style={{ position: 'absolute' }}>
                 <Image source={require('../../../img/mam.jpg')}
@@ -37,16 +69,21 @@ export default class Category extends React.Component {
                   fontSize: 20, color: 'black',
                 }}>Shrimp sauce</Text></View>
             </TouchableOpacity>
-            <Image source={require('../../../img/mam.jpg')}
-              style={styles.textImg} />
-            <Image source={require('../../../img/mam.jpg')}
-              style={styles.textImg} />
+            {/* ))} */}
           </Swiper>
         </View>
       </View>
     );
   }
 }
+
+function mapStateToProps(state){
+  return{
+    arrCat: state.arrCat,
+    isSignIn:state.isSignIn,
+  }
+}
+export default connect(mapStateToProps)(Category);
 
 const { height, width } = Dimensions.get('window');
 

@@ -79,6 +79,8 @@ class StackMain extends React.Component {
 }
 
 export default class Main extends React.Component {
+
+  
   _onOpen = () => {
     this.props.navigation.navigate('DrawerOpen')
     // alert("ahihi")

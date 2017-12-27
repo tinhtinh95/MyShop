@@ -11,6 +11,7 @@ import Auth from './components/Auth/Auth';
 import Info from './components/Info/Info';
 import Main from './components/Main/Main';
 import OrderHistory from './components/OrderHistory/OrderHistory';
+import {connect} from 'react-redux';
 
 const DrawerMain=DrawerNavigator({
   Home:{screen: Main},
@@ -25,9 +26,11 @@ const DrawerMain=DrawerNavigator({
 // }
 )
 
-export default class App extends React.Component {
-  componentWillMount() {
-    StatusBar.setHidden(true);
+class App extends React.Component {
+  componentWillMount(){
+    alert('getapi')
+    this.props.dispatch({type:'GET_API'});
+    // alert('getapi')
   }
   render() {
     return (
@@ -37,6 +40,13 @@ export default class App extends React.Component {
     );
   }
 }
+// function mapStateToProps(state){
+//   return {
+//     arrCat:state.isSigin,
+//   }
+// }
+export default connect()(App);
+
 
 const styles = StyleSheet.create({
   container: {

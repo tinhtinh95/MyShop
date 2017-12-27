@@ -16,6 +16,7 @@ import {connect} from 'react-redux';
 const { width } = Dimensions.get('window');
 class Auth extends React.Component {
   render() {
+    
     const SignIn = (
       <View style={styles.form}>
         <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your username' />
