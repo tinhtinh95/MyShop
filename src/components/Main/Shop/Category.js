@@ -8,35 +8,47 @@ import {
   Dimensions,
   Image,
   ScrollView,
-  TouchableOpacity,FlatList
+  TouchableOpacity, FlatList, Button
 } from 'react-native';
 import { mam } from "../../../img/mam.jpg";
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import {fetData} from '../../../actions/actionTypes';
+import store from '../../../redux/store';
 
 
 class Category extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-        data:[],
+    this.state = {
+      data: this.props.arrCat,
     }
   }
 
+  // componentDidMount(){
+  //   this.props.dispatch({type:'GET_API'});
+  //   // this.setState({data:this.props.arrCat})
+  // }
+
+  componentWillMount() {
+    // alert('componentWillMount')
+    // this.props.dispatch({ type: 'GET_API' });
+  }
   render() {
-    const {isSignIn,arrCat}=this.props;
-  
+    // const {isSignIn,arrCat}=this.props;
+alert(this.props);
     return (
       // <View></View>
       <View style={styles.wrapper}>
         <View style={{ flex: 1 }}><Text style={styles.textStyle}>Category</Text></View>
+        <Button title="click" onPress={() => {this.props.fetData()}}></Button>
         <View style={{ flex: 4 }}>
-        <FlatList
-        data={arrCat}
-        keyExtractor={(item, index)=>index}
-        renderItem={({item})=><Text>{item.id}</Text>}
-        >
+          <FlatList
+            data={this.props.arrCat}
+            keyExtractor={(item, index) => index}
+            renderItem={({ item }) => <Text>{item.id}</Text>}
+          >
 
-        </FlatList>
+          </FlatList>
           {/* <Swiper>
             {arrCat.map(e=>(
             <TouchableOpacity onPress={this.props.gotoList} style={{flex:1,position: 'absolute', }} >
@@ -63,13 +75,13 @@ class Category extends React.Component {
   }
 }
 
-function mapStateToProps(state){
-  return{
-    arrCat: state.arrCat,
-    isSignIn:state.isSignIn,
+function mapStateToProps(state) {
+  return {
+    arrCat: state.store,
+    // isSignIn:state.isSignIn,
   }
 }
-export default connect(mapStateToProps)(Category);
+export default connect(mapStateToProps,{fetData})(Category);
 
 const { height, width } = Dimensions.get('window');
 
@@ -83,9 +95,9 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 2,
     padding: 10,
-       shadowColor:"#2e272b", 
-       shadowOffset:{width:0, height:10}, 
-       shadowOpacity:0.2
+    shadowColor: "#2e272b",
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.2
 
   },
   textStyle: {

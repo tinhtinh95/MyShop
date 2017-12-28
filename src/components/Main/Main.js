@@ -25,7 +25,7 @@ const TabMain = TabNavigator({
 },
 
   {
-    // tabBarPosition: 'top',
+    tabBarPosition: 'bottom',
     animationEnabled: true,
     swipeEnabled: true,
     tabBarOptions: {

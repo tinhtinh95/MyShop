@@ -11,7 +11,7 @@ import Auth from './components/Auth/Auth';
 import Info from './components/Info/Info';
 import Main from './components/Main/Main';
 import OrderHistory from './components/OrderHistory/OrderHistory';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
 
 const DrawerMain=DrawerNavigator({
   Home:{screen: Main},
@@ -26,7 +26,7 @@ const DrawerMain=DrawerNavigator({
 // }
 )
 
-class App extends React.Component {
+export default class App extends React.Component {
   // componentWillMount(){
   //   alert('getapi')
   //   this.props.dispatch({type:'GET_API'});
@@ -45,7 +45,7 @@ class App extends React.Component {
 //     arrCat:state.isSigin,
 //   }
 // }
-export default connect()(App);
+// export default connect()(App);
 
 
 const styles = StyleSheet.create({
