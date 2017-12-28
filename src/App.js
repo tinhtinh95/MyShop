@@ -27,11 +27,11 @@ const DrawerMain=DrawerNavigator({
 )
 
 class App extends React.Component {
-  componentWillMount(){
-    alert('getapi')
-    this.props.dispatch({type:'GET_API'});
-    // alert('getapi')
-  }
+  // componentWillMount(){
+  //   alert('getapi')
+  //   this.props.dispatch({type:'GET_API'});
+  //   // alert('getapi')
+  // }
   render() {
     return (
       <View style={{flex:1,}}>

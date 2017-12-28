@@ -21,24 +21,10 @@ class Category extends React.Component {
         data:[],
     }
   }
-  // componentDidMount(){
-  //   fetch('http://localhost/api/')
-  //   .then((response) => response.json())
-  //   .then((responseJson) => {
-  //     this.setState({data: responseJson.type});
-  //   })
-  //   .catch((error) => {
-  //       console.error(error);
-  //   });
-  // }
+
   render() {
-    // const listCat=this.props.arrCat;
     const {isSignIn,arrCat}=this.props;
-    // alert(arrCat);
-    // alert(isSignIn);
-    // alert(`state send to task list =${JSON.stringify(arrCat)} `);
-    // alert(arrCat);
-    // console.log(arrCat.id)
+  
     return (
       // <View></View>
       <View style={styles.wrapper}>
@@ -51,14 +37,13 @@ class Category extends React.Component {
         >
 
         </FlatList>
-          <Swiper>
-            {/* {arrCat.map(e=>( */}
+          {/* <Swiper>
+            {arrCat.map(e=>(
             <TouchableOpacity onPress={this.props.gotoList} style={{flex:1,position: 'absolute', }} >
               <View style={{ position: 'absolute' }}>
                 <Image source={require('../../../img/mam.jpg')}
                   style={styles.textImg}>
-                  {/* <Text>Ahihi</Text> */}
-                </Image>
+                  <Text>Ahihi</Text></Image>
 
               </View>
               <View style={{
@@ -67,10 +52,11 @@ class Category extends React.Component {
                 }}>
                 <Text style={{
                   fontSize: 20, color: 'black',
-                }}>Shrimp sauce</Text></View>
+                }}>Shrimp sauce</Text>
+                </View>
             </TouchableOpacity>
-            {/* ))} */}
-          </Swiper>
+             ))} 
+          </Swiper> */}
         </View>
       </View>
     );

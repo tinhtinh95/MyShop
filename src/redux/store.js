@@ -2,10 +2,21 @@ import App from '../App';
 import { createStore } from 'redux';
 
 
+async function getDataApi() {
+    try {
+      let response = await fetch(
+        'http://localhost/api/'
+      );
+      let responseJson = await response.json();
+      return responseJson.type;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
 var defaultState = {
     isSignIn: true,
-    arrCat:[{id:11110}]
+    arrCat: getDataApi(),
 }
 
 const reducer = (state = defaultState, action) => {
@@ -15,35 +26,25 @@ const reducer = (state = defaultState, action) => {
                 ...state,
                 isSignIn: !state.isSignIn,
             }
-        case 'GET_API': {
-            var newArr=[];
-            // fetchData = () => {
-                fetch('http://localhost/api/')
-                    .then((response) => response.json())
-                    .then((responseJson) => {
-                        state.arrCat=responseJson.type;
-                        console.log(newArr);
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
-            // }
-            
-            return {
-                ...state,
-                arrCat:[fetch('http://localhost/api/')
-                .then((response) => response.json())
-                .then((responseJson) => {
-                    return responseJson.type;
-                    // console.log(newArr);
-                })]
-                // .catch((error) => {
-                //     console.error(error);
-                // }),
-                // arrCat:{arrCat},
-            }
-            // alert(arrCat)
-        }
+        // case 'GET_API': {
+        //     var newArr=
+        //     async function fetchData(){
+        //         await fetch('http://localhost/api/')
+        //             .then((response) => response.json())
+        //             .then((responseJson) => {
+        //                 return responseJson.type;
+        //                 // console.log(responseJson.type);
+        //             })
+        //             .catch((error) => {
+        //                 console.error(error);
+        //             });
+        //     }; console.log(newArr);
+        //     return {
+        //         ...state,
+        //         arrCat:newArr,
+        //     }
+        //     // alert(arrCat)
+        // }
         default:
             return state;
     }
