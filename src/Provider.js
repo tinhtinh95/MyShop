@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import {StatusBar} from 'react-native';
 import App from './App';
-import configStore from './redux/configStore';
+import store from './redux/configStore';
 import {Provider,connect} from 'react-redux';
 
 
@@ -14,7 +14,7 @@ export default class Main extends Component {
   render() {
       
       return (
-          <Provider store={configStore}>
+          <Provider store={store}>
               <App/>
           </Provider>
       )

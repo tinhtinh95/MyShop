@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { mam } from "../../../img/mam.jpg";
 import { connect } from 'react-redux';
-import {fetData} from '../../../actions/actionTypes';
+import {fetData} from '../../../actions';
 import store from '../../../redux/store';
 
 
@@ -77,7 +77,7 @@ alert(this.props);
 
 function mapStateToProps(state) {
   return {
-    arrCat: state.store,
+    arrCat: state.fetchReducer,
     // isSignIn:state.isSignIn,
   }
 }

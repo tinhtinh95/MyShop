@@ -1,0 +1,3 @@
+export const FETCHING_OK="FETCHING_OK";
+export const FETCHING="FETCHING";
+export const FETCHING_FAIL="FETCHING_FAIL";

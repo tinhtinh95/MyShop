@@ -1,6 +1,6 @@
 // import App from '../App';
 import { createStore } from 'redux';
-import {FETCHING} from '../actions/types';
+import {FETCHING} from '../../actions/types';
 
 
 // async function getDataApi() {
@@ -21,7 +21,7 @@ var defaultState = {
     // noname: 1,
 }
 
-export default reducer = (state = defaultState, action) => {
+export default (state = defaultState, action) => {
     switch (action.type) {
         case 'TOGGLE_SIGNIN':
             return {
