@@ -31,7 +31,7 @@ class Shop extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <Text onPress={this._gotoList}>ahh</Text>
-        <Category gotoList={this._gotoList} />
+        {/* <Category gotoList={this._gotoList} /> */}
         <Product />
       </ScrollView> 
     );

@@ -1,1 +1,1 @@
-import {getData} from './actionTypes';
+// import {getData} from './actionTypes';

@@ -12,8 +12,7 @@ import {
 } from 'react-native';
 import { mam } from "../../../img/mam.jpg";
 import { connect } from 'react-redux';
-import {fetData} from '../../../actions';
-import store from '../../../redux/store';
+import {fetchData} from '../../../actions/actionTypes';
 
 
 class Category extends React.Component {
@@ -40,7 +39,7 @@ alert(this.props);
       // <View></View>
       <View style={styles.wrapper}>
         <View style={{ flex: 1 }}><Text style={styles.textStyle}>Category</Text></View>
-        <Button title="click" onPress={() => {this.props.fetData()}}></Button>
+        <Button title="click" onPress={() => {this.props.fetchData()}}></Button>
         <View style={{ flex: 4 }}>
           <FlatList
             data={this.props.arrCat}
@@ -77,11 +76,11 @@ alert(this.props);
 
 function mapStateToProps(state) {
   return {
-    arrCat: state.fetchReducer,
+    // arrCat: state.fetchReducer,
     // isSignIn:state.isSignIn,
   }
 }
-export default connect(mapStateToProps,{fetData})(Category);
+export default connect(mapStateToProps,{fetchData})(Category);
 
 const { height, width } = Dimensions.get('window');
 

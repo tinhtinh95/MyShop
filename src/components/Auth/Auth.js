@@ -11,6 +11,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import {connect} from 'react-redux';
+import {Toggle_SignIn} from '../../actions/actionTypes';
 
 
 const { width } = Dimensions.get('window');
@@ -54,10 +55,10 @@ class Auth extends React.Component {
         {showComponent} 
         <View style={styles.bottomContainer}>
           <TouchableOpacity 
-          onPress={()=>this.props.dispatch({type:'TOGGLE_SIGNIN'})}
+          onPress={()=>this.props.Toggle_SignIn()}
           style={isSignIn ?styles.btnChosenLeft: styles.btnNotChosenLeft}><Text style={isSignIn ? styles.boldText: { color: 'yellow' } }>Sign in</Text></TouchableOpacity>
           <TouchableOpacity
-          onPress={()=>this.props.dispatch({type:'TOGGLE_SIGNIN'})}
+          onPress={()=>this.props.Toggle_SignIn()}
           style={!isSignIn ?styles.btnChosenRight: styles.btnNotChosenRight}><Text style={isSignIn ? { color: 'yellow' } :styles.boldText}>Sign up</Text></TouchableOpacity>
         </View>
       </View>
@@ -69,7 +70,7 @@ function mapStateToProps(state){
     isSignIn: state.isSignIn,
   }
 }
-export default connect(mapStateToProps)(Auth);
+export default connect(mapStateToProps,{Toggle_SignIn})(Auth);
 
 
 const styles = StyleSheet.create({

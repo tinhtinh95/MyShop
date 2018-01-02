@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {StatusBar} from 'react-native';
 import App from './App';
 import store from './redux/configStore';
-import {Provider,connect} from 'react-redux';
+import {Provider} from 'react-redux';
 
 
 

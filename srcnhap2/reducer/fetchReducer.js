@@ -8,7 +8,7 @@ var defaultState = {
     // noname: 1,
 }
 
-export default (state = defaultState, action) => {
+const reducerFetchData=(state = defaultState, action) => {
     switch (action.type) {
     
             case types.FETCHING:
@@ -34,5 +34,5 @@ export default (state = defaultState, action) => {
             return state;
     }
 }
-
+export default reducerFetchData;
 

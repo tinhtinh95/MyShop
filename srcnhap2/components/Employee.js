@@ -7,7 +7,7 @@ import {
   View, StatusBar, TouchableOpacity
 } from 'react-native';
 import {connect} from 'react-redux';
-import {fetchData} from '../actions';
+import {fetchData} from '../actions/fetchAction';
 
 class Employee extends React.Component {
   render() {
@@ -30,7 +30,7 @@ class Employee extends React.Component {
 
 function mapStateToProps(state){
   return {
-    data:state.arrCat,
+    data:state.myData,
   }
 }
 export default connect(mapStateToProps,{fetchData})(Employee);
