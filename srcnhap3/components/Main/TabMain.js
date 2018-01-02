@@ -35,7 +35,7 @@ export default class TabMain extends React.Component {
     StatusBar.setHidden(true);
   }
   render() {
-    console.log(this.props.data);
+    // console.log(this.props.data);
     return (
       <TabItem/>
     );

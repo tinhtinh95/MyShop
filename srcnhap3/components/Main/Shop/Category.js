@@ -16,14 +16,9 @@ import {fetchData} from '../../../actions/actions';
 
 
 class Category extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: this.props.arrCat,
-    }
-  }
-  componentWillMount() {
-    this.props.fetchData();
+  
+  componentDidMount() {
+    this.props.fetchData('type');
   }
   render() {
     return (
@@ -39,12 +34,11 @@ class Category extends React.Component {
 
           </FlatList> */}
           <Swiper>
-            {this.props.arrCat.map(e=>(
+            {this.props.listCat.map(e=>(
             <TouchableOpacity key={e.id} onPress={this.props.gotoList} style={{flex:1,position: 'absolute', }} >
               <View style={{ position: 'absolute' }}>
                 <Image source={require('../../../img/mam.jpg')}
                   style={styles.textImg}>
-                  {/* <Text>Ahihi</Text> */}
                   </Image>
 
               </View>
@@ -54,7 +48,7 @@ class Category extends React.Component {
                 }}>
                 <Text style={{
                   fontSize: 20, color: 'black',
-                }}>Shrimp sauce</Text>
+                }}>{e.name}</Text>
                 </View>
             </TouchableOpacity>
              ))} 
@@ -67,7 +61,7 @@ class Category extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    arrCat: state.listCat,
+    listCat: state.listCat,
   }
 }
 export default connect(mapStateToProps,{fetchData})(Category);

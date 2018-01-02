@@ -10,64 +10,37 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
-import { mam } from "../../../img/mam.jpg";
+import {connect} from 'react-redux';
+import {fetchData} from '../../../actions/actions';
 
 
 const { height, width } = Dimensions.get('window');
 
 const imgWidth = width - 40;
 const imgHeight = (imgWidth / 1296) * 899 * 0.9;
-const productWidth=(width-50)/2;
-const productHeight=(productWidth*745)/556;
+const productWidth = (width - 50) / 2;
+const productHeight = (productWidth * 745) / 556;
 
-export default class Product extends React.Component {
+class Product extends React.Component {
+  componentDidMount(){
+    this.props.fetchData('product');
+  }
   render() {
     return (
       <View style={styles.wrapper}>
         <View>
           <Text style={styles.textStyle}>Product</Text>
         </View>
-        <View style={{  flexDirection: 'row',
-        
-        justifyContent:'space-around', flexWrap:'wrap'
-         }}>
-          <View style={{width:productWidth, marginRight: 10,shadowColor: "#2e272b",
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.2, }}>
-            <Image
-            style={{width:productWidth, height:200}}
-            source={require('../../../img/muc1.jpg')} />
-            <Text style={styles.textName}>Product name</Text>
-            <Text style={styles.textPrice}>3$</Text>
-          </View>
-          <View style={{width:productWidth, 
-            justifyContent:'flex-end',
-             }}>
-            <Image
-            style={{width:productWidth, height:200}}
-            source={require('../../../img/muc1.jpg')} />
-            <Text style={styles.textName}>Product name</Text>
-            <Text style={styles.textPrice}>2$</Text>
-          </View>
-          <View style={{height:10,width}}/>
-          <View style={{width:productWidth, 
-            justifyContent:'flex-end',
-             }}>
-            <Image
-            style={{width:productWidth, height:200}}
-            source={require('../../../img/muc1.jpg')} />
-            <Text style={styles.textName}>Product name</Text>
-            <Text style={styles.textPrice}>2$</Text>
-          </View>
-          <View style={{width:productWidth, 
-            justifyContent:'flex-end',
-             }}>
-            <Image
-            style={{width:productWidth, height:200}}
-            source={require('../../../img/muc1.jpg')} />
-            <Text style={styles.textName}>Product name</Text>
-            <Text style={styles.textPrice}>2$</Text>
-          </View>
+        <View style={styles.wrapperItems}>
+          {this.props.listProduct.map(e => (
+            <View key={e.id} style={styles.wrapperItem}>
+              <Image
+                style={{ width: productWidth, height: 200 }}
+                source={require('../../../img/muc1.jpg')} />
+              <Text style={styles.textName}>{e.name}</Text>
+              <Text style={styles.textPrice}>{e.price}$</Text>
+            </View>
+          ))}
         </View>
       </View>
 
@@ -75,6 +48,14 @@ export default class Product extends React.Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    listProduct: state.listProduct,
+  }
+}
+export default connect(mapStateToProps,{fetchData})(Product);
+
+
 const styles = StyleSheet.create({
   wrapper: {
     // height: height * 0.8,
@@ -99,13 +80,25 @@ const styles = StyleSheet.create({
     height: imgHeight,
     // position: 'absolute'
   },
-  textName:{
+  textName: {
     fontSize: 15,
     color: "#accaca",
   },
-  textPrice:{
+  textPrice: {
     fontSize: 15,
     color: "purple",
+  },
+  wrapperItems: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap'
+  },
+  wrapperItem: {
+    width: productWidth,
+    justifyContent: 'flex-end',
+    shadowColor: "#2e272b",
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.2,
   }
 });
 
