@@ -12,11 +12,12 @@ import {
 } from 'react-native';
 import { mam } from "../../../img/mam.jpg";
 import { connect } from 'react-redux';
-import {fetchData} from '../../../actions/actions';
+import { fetchData } from '../../../actions/actions';
 
+const url = 'http://localhost/api/images/type/';
 
 class Category extends React.Component {
-  
+
   componentDidMount() {
     this.props.fetchData('type');
   }
@@ -34,24 +35,22 @@ class Category extends React.Component {
 
           </FlatList> */}
           <Swiper>
-            {this.props.listCat.map(e=>(
-            <TouchableOpacity key={e.id} onPress={this.props.gotoList} style={{flex:1,position: 'absolute', }} >
-              <View style={{ position: 'absolute' }}>
-                <Image source={require('../../../img/mam.jpg')}
-                  style={styles.textImg}>
+            {this.props.listCat.map(e => (
+              <TouchableOpacity key={e.id} onPress={this.props.gotoList}
+              >
+                <View style={{ position: 'absolute' }}>
+                  <Image source={{ uri: `${url}${e.image}` }}
+                    style={styles.textImg}>
                   </Image>
 
-              </View>
-              <View style={{
-                   paddingHorizontal : 100,
-                   paddingVertical : 90,
-                }}>
-                <Text style={{
-                  fontSize: 20, color: 'black',
-                }}>{e.name}</Text>
                 </View>
-            </TouchableOpacity>
-             ))} 
+                <View style={styles.text}>
+                  <Text style={{
+                    fontSize: 20, color: 'black',
+                  }}>{e.name}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
           </Swiper>
         </View>
       </View>
@@ -64,12 +63,12 @@ function mapStateToProps(state) {
     listCat: state.listCat,
   }
 }
-export default connect(mapStateToProps,{fetchData})(Category);
+export default connect(mapStateToProps, { fetchData })(Category);
 
 const { height, width } = Dimensions.get('window');
 
 const imgWidth = width - 40;
-const imgHeight = (imgWidth / 1296) * 899 * 0.9;
+const imgHeight = (imgWidth / 1296) * 950;
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -91,6 +90,12 @@ const styles = StyleSheet.create({
     width: imgWidth,
     height: imgHeight,
     // position: 'absolute'
+  },
+  text: {
+    paddingHorizontal: 100,
+    paddingVertical: 90,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });
 

@@ -10,9 +10,10 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
-import {connect} from 'react-redux';
-import {fetchData} from '../../../actions/actions';
+import { connect } from 'react-redux';
+import { fetchData } from '../../../actions/actions';
 
+const url = 'http://localhost/api/images/product/';
 
 const { height, width } = Dimensions.get('window');
 
@@ -22,7 +23,7 @@ const productWidth = (width - 50) / 2;
 const productHeight = (productWidth * 745) / 556;
 
 class Product extends React.Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchData('product');
   }
   render() {
@@ -31,17 +32,23 @@ class Product extends React.Component {
         <View>
           <Text style={styles.textStyle}>Product</Text>
         </View>
-        <View style={styles.wrapperItems}>
+        <View style={styles.wrapperItems} >
           {this.props.listProduct.map(e => (
-            <View key={e.id} style={styles.wrapperItem}>
-              <Image
-                style={{ width: productWidth, height: 200 }}
-                source={require('../../../img/muc1.jpg')} />
-              <Text style={styles.textName}>{e.name}</Text>
-              <Text style={styles.textPrice}>{e.price}$</Text>
-            </View>
-          ))}
+            <TouchableOpacity key={e.id}
+              style={styles.wrapperItem}
+              onPress={() => this.props.gotoDetail(e)}
+            >
+              <View>
+                <Image
+                  style={{ width: productWidth, height: 200 }}
+                  source={{ uri: `${url}${e.images[0]}` }} />
+                <Text style={styles.textName}>{e.name}</Text>
+                <Text style={styles.textPrice}>{e.price}$</Text>
+              </View>
+
+            </TouchableOpacity>))}
         </View>
+
       </View>
 
 
@@ -53,7 +60,7 @@ function mapStateToProps(state) {
     listProduct: state.listProduct,
   }
 }
-export default connect(mapStateToProps,{fetchData})(Product);
+export default connect(mapStateToProps, { fetchData })(Product);
 
 
 const styles = StyleSheet.create({
@@ -90,8 +97,9 @@ const styles = StyleSheet.create({
   },
   wrapperItems: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    flexWrap: 'wrap'
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+
   },
   wrapperItem: {
     width: productWidth,
@@ -99,6 +107,7 @@ const styles = StyleSheet.create({
     shadowColor: "#2e272b",
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.2,
+    marginBottom: 5,
   }
 });
 

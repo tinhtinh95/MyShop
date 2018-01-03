@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import { 
     View, Text, StyleSheet, Image, Dimensions, ScrollView, TouchableOpacity 
 } from 'react-native';
-
-// import img1 from '../../../../media/temp/sp5.jpeg';
-// import img2 from '../../../../media/temp/sp4.jpeg';
-
-// const back = require('../../../../media/appIcon/back.png');
-// const cart = require('../../../../media/appIcon/cartfull.png');
+import {connect} from 'react-redux';
+import {add_cart} from '../../../actions/actions';
 
 
+const url = 'http://localhost/api/images/product/';
 
-export default class ProductDetail extends Component {
+
+
+class ProductDetail extends Component {
     render() {
         const {
             wrapper, cardStyle, header,
@@ -21,6 +20,8 @@ export default class ProductDetail extends Component {
             descContainer, productImageStyle, descStyle, txtMaterial, txtColor
         } = styles;
         const {goBack}= this.props.navigation;
+        const {params}=this.props.navigation.state;
+        console.log(params)
         return (
             <View style={wrapper}>
                 <View style={cardStyle}>
@@ -28,22 +29,22 @@ export default class ProductDetail extends Component {
                         <TouchableOpacity onPress={()=>goBack()}>
                             <Image style={backStyle} source={require('../../../media/appIcon/back.png')} />
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.props.add_cart(params.product)}>
                             <Image style={cartStyle} source={require('../../../media/appIcon/cartfull.png')} />
                         </TouchableOpacity>
                     </View>
                     <View style={imageContainer}>
                         <ScrollView style={{ flexDirection: 'row', padding: 10, height: swiperHeight }} horizontal >
-                            <Image source={require('../../../img/muc3.jpg')} style={productImageStyle} />
-                            <Image source={require('../../../img/muc3.jpg')} style={productImageStyle} />
+                            <Image source={{uri:`${url}${params.product.images[0]}`}} style={productImageStyle} />
+                            <Image source={{uri:`${url}${params.product.images[0]}`}} style={productImageStyle} />
                         </ScrollView>
                     </View>
                     <View style={footer}>
                         <View style={titleContainer}>
                             <Text style={textMain}>
-                                <Text style={textBlack}>{'back of the'.toUpperCase()}</Text>
+                                <Text style={textBlack}>{params.product.name.toUpperCase()}</Text>
                                 <Text style={textHighlight}> / </Text>
-                                <Text style={textSmoke}>100$</Text>
+                                <Text style={textSmoke}>{params.product.price}$</Text>
                             </Text>
                         </View>
                         <View style={descContainer}>
@@ -62,6 +63,11 @@ export default class ProductDetail extends Component {
         );
     }
 }
+
+
+
+export default connect(null,{add_cart})(ProductDetail);
+
 
 const { width } = Dimensions.get('window');
 const swiperWidth = (width / 1.8) - 30;

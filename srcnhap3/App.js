@@ -8,7 +8,7 @@ import {
 import DrawerMain from './components/DrawerMain';
 import {Provider} from 'react-redux';
 import store from './configStore';
-// 
+
 export default class App extends React.Component {
     render(){
         return(

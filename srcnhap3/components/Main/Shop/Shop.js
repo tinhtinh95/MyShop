@@ -11,20 +11,23 @@ import {
 import Category from './Category';
 import Product from './Product';
 import { StackNavigator } from 'react-navigation';
-import List from './ListProduct';
+import List from './ListProductByCat';
 import Detail from './Detail';
 
 class Shop extends React.Component {
 
   _gotoList = () => {
-    this.props.navigation.navigate('ListProduct')
+    this.props.navigation.navigate('ListProductByCat')
+  }
+  _gotoDetail = (product) => {
+    this.props.navigation.navigate('Detail',{product})
   }
   render() {
     return (
       <ScrollView style={styles.container}>
         <Category gotoList={this._gotoList} />
-        <Product />
-      </ScrollView> 
+        <Product gotoDetail={this._gotoDetail} />
+      </ScrollView>
     );
   }
 }
