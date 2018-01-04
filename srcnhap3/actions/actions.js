@@ -42,5 +42,6 @@ export function add_cart(data){
     return {
         type:types.ADD_CART,
         payload:data,
+        // payCount:quantity,
     }
 }

@@ -42,7 +42,7 @@ class CartView extends Component {
                                     <TouchableOpacity>
                                         <Text>+</Text>
                                     </TouchableOpacity>
-                                    <Text>{3}</Text>
+                                    <Text>{e.quantity}</Text>
                                     <TouchableOpacity>
                                         <Text>-</Text>
                                     </TouchableOpacity>

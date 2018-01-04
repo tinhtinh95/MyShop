@@ -21,7 +21,9 @@ class ProductDetail extends Component {
         } = styles;
         const {goBack}= this.props.navigation;
         const {params}=this.props.navigation.state;
-        console.log(params)
+        // console.log(params)
+        // const listPro=params.product.map()
+        params.product['quantity']=1;
         return (
             <View style={wrapper}>
                 <View style={cardStyle}>
