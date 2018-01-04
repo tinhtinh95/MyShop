@@ -1,4 +1,6 @@
 import { ADD_CART } from '../actions/actiontypes';
+import saveCart from '../api/saveCart';
+import getCart from '../api/getCart';
 
 const cart = [];
 
@@ -23,9 +25,9 @@ const reducerCart = (state = cart, action) => {
             // //     }
             // }
 
-            state.filter(e => {
+            state.map(e => {
                 if (e.id !== action.payload.id) {
-                    console.log('chua co')
+                    // console.log('chua co')
                     check = true;
                 } else {
                     check = false;
@@ -33,8 +35,18 @@ const reducerCart = (state = cart, action) => {
                 }
             })
 
+            // state.filter(e => {
+            //     if (e.id !== action.payload.id) {
+            //         console.log('chua co')
+            //         check = true;
+            //     } else {
+            //         check = false;
+            //         return;
+            //     }
+            // })
+
             if (check || state.length === 0) {
-                console.log('null');
+                // console.log('null');
                 state = state.concat(action.payload);
                 // check = false;
             } else {
@@ -46,8 +58,11 @@ const reducerCart = (state = cart, action) => {
                     return { ...e, quantity: e.quantity + 1 };
                 });
             }
+            saveCart(state);
             return state;
         default:
+            getCart()
+            .then(cartArray => {state = cartArray})
             return state;
     }
 }
