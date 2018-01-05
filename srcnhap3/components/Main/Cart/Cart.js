@@ -4,6 +4,7 @@ import {
     Dimensions, StyleSheet, Image, FlatList 
 } from 'react-native';
 import {connect} from 'react-redux';
+import getCart from '../../../api/getCart';
 
 
 function toTitleCase(str) {
@@ -21,9 +22,16 @@ class CartView extends Component {
         const { navigator } = this.props;
         navigator.push({ name: 'PRODUCT_DETAIL' });
     }
-    componentDidMount(){
-        this.setState({data:this.props.listCart})
-    }
+    // componentDidMount(){
+    //     // this.setState({data:this.props.listCart})
+    //     getCart()
+    //     .then(cartArray => {
+    //         console.log('cartAraay get: ', cartArray)
+    //         // state = cartArray;
+    //         this.setState({data:cartArray})
+    //         // return state;
+    //     })
+    // }
     render() {
         console.log(this.props.listCart);
         const { main, checkoutButton, checkoutTitle, wrapper,

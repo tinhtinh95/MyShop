@@ -1,4 +1,4 @@
-const BASE_URL = 'http://192.168.1.21/api/';
+const BASE_URL = 'http://localhost/api/';
 
 const API = {
     getList(name) {
@@ -6,10 +6,10 @@ const API = {
             .then((response) => response.json())
             .then((responseJson) => {
                 if (name === 'type') {
-                    console.log(name, responseJson.type);
+                    // console.log(name, responseJson.type);
                     return responseJson.type;
                 } else if (name === 'product'){
-                    console.log(name, responseJson.product);
+                    // console.log(name, responseJson.product);
                     return responseJson.product;
                 }
             })

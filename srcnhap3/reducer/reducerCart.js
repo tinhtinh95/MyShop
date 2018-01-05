@@ -58,12 +58,22 @@ const reducerCart = (state = cart, action) => {
                     return { ...e, quantity: e.quantity + 1 };
                 });
             }
-            saveCart(state);
-            return state;
+            async() => {
+                await saveCart(state);
+                return state;
+            }
+        // saveCart(state);
+        // return state;
         default:
-            getCart()
-            .then(cartArray => {state = cartArray})
-            return state;
+            {
+                getCart()
+                    .then(cartArray => {
+                        console.log('cartAraay get: ', cartArray)
+                        state = cartArray;
+                        // return state;
+                    })
+                return state;
+            }
     }
 }
 export default reducerCart;
