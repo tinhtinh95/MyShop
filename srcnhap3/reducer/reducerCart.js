@@ -1,10 +1,12 @@
-import { ADD_CART } from '../actions/actiontypes';
+import { ADD_CART, GET_CART } from '../actions/actiontypes';
 import saveCart from '../api/saveCart';
 import getCart from '../api/getCart';
 
-const cart = [];
 
-const reducerCart = (state = cart, action) => {
+
+
+
+const reducerCart = (state = [], action) => {
     switch (action.type) {
         case ADD_CART:
             var check = false;
@@ -62,22 +64,25 @@ const reducerCart = (state = cart, action) => {
             //     await saveCart(state)
             // )
             // return state;
-        saveCart(state,{});
-        return state;
+            saveCart(state);
+            console.log('sauasave');
+            return state;
+        case GET_CART:
+            {
+
+                getCart()
+                    .then(cartArray => {
+                        // return cartArray
+                        console.log('cartAraay get: ', cartArray)
+                        state = cartArray;
+                        console.log('state get: ', state)
+                        // return state;
+                    })
+            }
+            console.log('state oday:', state)
+            return state;
         default:
             {
-                // async () => (
-                    // await 
-                    getCart()
-                        .then(cartArray => {
-                            console.log('cartAraay get: ', cartArray)
-                            state = cartArray;
-                            console.log('state get: ', state)
-                            // return state;
-                        })
-                // )
-
-
                 return state;
             }
     }

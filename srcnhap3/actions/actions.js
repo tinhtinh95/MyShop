@@ -45,3 +45,8 @@ export function add_cart(data){
         // payCount:quantity,
     }
 }
+export function getCart(){
+    return{
+        type:types.GET_CART,
+    }
+}

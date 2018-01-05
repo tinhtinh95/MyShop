@@ -4,7 +4,7 @@ import {
     Dimensions, StyleSheet, Image, FlatList 
 } from 'react-native';
 import {connect} from 'react-redux';
-import getCart from '../../../api/getCart';
+import {getCart} from '../../../actions/actions';
 
 
 function toTitleCase(str) {
@@ -22,16 +22,10 @@ class CartView extends Component {
         const { navigator } = this.props;
         navigator.push({ name: 'PRODUCT_DETAIL' });
     }
-    // componentDidMount(){
-    //     // this.setState({data:this.props.listCart})
-    //     getCart()
-    //     .then(cartArray => {
-    //         console.log('cartAraay get: ', cartArray)
-    //         // state = cartArray;
-    //         this.setState({data:cartArray})
-    //         // return state;
-    //     })
-    // }
+    componentWillUpdate(){
+        this.props.getCart();
+        console.log('ahihi')
+    }
     render() {
         console.log(this.props.listCart);
         const { main, checkoutButton, checkoutTitle, wrapper,
@@ -86,7 +80,7 @@ function mapStateToProps(state){
         listCart:state.listCart,
     }
 }
-export default connect(mapStateToProps)(CartView);
+export default connect(mapStateToProps,{getCart})(CartView);
 
 const { width } = Dimensions.get('window');
 const imageWidth = width / 4;
