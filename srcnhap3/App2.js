@@ -19,9 +19,8 @@ export default class App extends React.Component {
     savedata = async (count) => {
         try {
             count = count + 1;
-            // this.setState({count:JSON.parse(value)})
-            this.setState({count:count})
             console.log('count: ',count);
+            this.setState({count})
             await AsyncStorage.setItem('@count', JSON.stringify(count));
             console.log('da set');
         } catch (error) {
@@ -32,28 +31,29 @@ export default class App extends React.Component {
         try {
             const value = await AsyncStorage.getItem('@count');
             if (value !== null) {
-                // We have data!!
                 console.log('value:',value);
+                this.setState({count:JSON.parse(value)})
                 return value;
-                // this.setState({count:JSON.parse(value)})
+                
             }
         } catch (error) {
             console.log('loi get');
+            return 1;
         }
     }
+    componentWillMount(){
+        this.getdata();
+    }
     render() {
+        const a=this.getdata();
         return (
             <View>
                 <TouchableOpacity
                 onPress={()=>this.savedata(this.state.count)}
                 >
-                    <Text>save</Text>
+                    <Text>add</Text>
                 </TouchableOpacity>
-                <TouchableOpacity 
-                onPress={()=>this.getdata()}
-                >
-                    <Text>get</Text>
-                </TouchableOpacity>
+               
                 <Text>{this.state.count}</Text>
             </View>
         )

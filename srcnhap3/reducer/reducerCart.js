@@ -1,12 +1,20 @@
 import { ADD_CART, GET_CART } from '../actions/actiontypes';
 import saveCart from '../api/saveCart';
 import getCart from '../api/getCart';
+import { AsyncStorage } from 'react-native';
+
+const defaultState=[];
+getCart()
+.then(cartArray => {
+    console.log('cartAraay get: ', cartArray)
+    defaultState= cartArray;
+    // return cartArray;
+    console.log('defaultState get: ', defaultState)
+}, err=> {defaultState=[];}
+);
 
 
-
-
-
-const reducerCart = (state = [], action) => {
+const reducerCart = (state = defaultState, action) => {
     switch (action.type) {
         case ADD_CART:
             var check = false;
@@ -60,26 +68,19 @@ const reducerCart = (state = [], action) => {
                     return { ...e, quantity: e.quantity + 1 };
                 });
             }
-            // async () => (
-            //     await saveCart(state)
-            // )
-            // return state;
+
             saveCart(state);
-            console.log('sauasave');
+            console.log('sau save');
             return state;
         case GET_CART:
-            {
 
-                getCart()
-                    .then(cartArray => {
-                        // return cartArray
-                        console.log('cartAraay get: ', cartArray)
-                        state = cartArray;
-                        console.log('state get: ', state)
-                        // return state;
-                    })
-            }
-            console.log('state oday:', state)
+            // getCart()
+            //     .then(cartArray => {
+            //         console.log('cartAraay get: ', cartArray)
+            //         state = cartArray;
+            //         console.log('state get: ', state)
+            //     })
+            
             return state;
         default:
             {

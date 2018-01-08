@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { 
-    View, Text, TouchableOpacity, ScrollView, 
-    Dimensions, StyleSheet, Image, FlatList 
+import {
+    View, Text, TouchableOpacity, ScrollView,
+    Dimensions, StyleSheet, Image, FlatList
 } from 'react-native';
-import {connect} from 'react-redux';
-import {getCart} from '../../../actions/actions';
+import { connect } from 'react-redux';
+import { getCart } from '../../../actions/actions';
 
 
 function toTitleCase(str) {
@@ -12,60 +12,60 @@ function toTitleCase(str) {
 }
 
 class CartView extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            data:[]
+        this.state = {
+            data: []
         }
     }
     gotoDetail() {
         const { navigator } = this.props;
         navigator.push({ name: 'PRODUCT_DETAIL' });
     }
-    componentWillUpdate(){
-        this.props.getCart();
+    componentDidMount() {
+        // this.props.getCart();
         console.log('ahihi')
     }
     render() {
         console.log(this.props.listCart);
         const { main, checkoutButton, checkoutTitle, wrapper,
-        product, mainRight, productController,
-            txtName, txtPrice, productImage, numberOfProduct, 
+            product, mainRight, productController,
+            txtName, txtPrice, productImage, numberOfProduct,
             txtShowDetail, showDetailContainer } = styles;
         return (
             <View style={wrapper}>
                 <FlatList
-                data={this.props.listCart}
-                keyExtractor={(item,index)=>item.id}
-                renderItem={({item})=> 
-                    <View style={product}>
-                    <Image source={require('../../../img/muc3.jpg')} style={productImage} />
-                    <View style={[mainRight]}>
-                        <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
-                            <Text style={txtName}>{toTitleCase('black of the')}</Text>
-                            <TouchableOpacity>
-                                <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View>
-                            <Text style={txtPrice}>{item.price}$</Text>
-                        </View>
-                        <View style={productController}>
-                            <View style={numberOfProduct}>
-                                <TouchableOpacity>
-                                    <Text>+</Text>
-                                </TouchableOpacity>
-                                <Text>{item.quantity}</Text>
-                                <TouchableOpacity>
-                                    <Text>-</Text>
-                                </TouchableOpacity>
+                    data={this.props.listCart}
+                    keyExtractor={(item, index) => item.id}
+                    renderItem={({ item }) =>
+                        <View style={product}>
+                            <Image source={require('../../../img/muc3.jpg')} style={productImage} />
+                            <View style={[mainRight]}>
+                                <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
+                                    <Text style={txtName}>{toTitleCase('black of the')}</Text>
+                                    <TouchableOpacity>
+                                        <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View>
+                                    <Text style={txtPrice}>{item.price}$</Text>
+                                </View>
+                                <View style={productController}>
+                                    <View style={numberOfProduct}>
+                                        <TouchableOpacity>
+                                            <Text style={{ fontSize: 25 }}>+</Text>
+                                        </TouchableOpacity>
+                                        <Text style={{ fontSize: 25 }}>{item.quantity}</Text>
+                                        <TouchableOpacity>
+                                            <Text style={{ fontSize: 25 }}>-</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                    <TouchableOpacity style={showDetailContainer}>
+                                        <Text style={txtShowDetail}>SHOW DETAILS</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
-                            <TouchableOpacity style={showDetailContainer}>
-                                <Text style={txtShowDetail}>SHOW DETAILS</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>}
+                        </View>}
                 >
                 </FlatList>
                 <TouchableOpacity style={checkoutButton}>
@@ -75,12 +75,12 @@ class CartView extends Component {
         );
     }
 }
-function mapStateToProps(state){
+function mapStateToProps(state) {
     return {
-        listCart:state.listCart,
+        listCart: state.listCart,
     }
 }
-export default connect(mapStateToProps,{getCart})(CartView);
+export default connect(mapStateToProps, { getCart })(CartView);
 
 const { width } = Dimensions.get('window');
 const imageWidth = width / 4;
