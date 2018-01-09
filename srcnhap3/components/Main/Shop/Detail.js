@@ -31,7 +31,9 @@ class ProductDetail extends Component {
                         <TouchableOpacity onPress={()=>goBack()}>
                             <Image style={backStyle} source={require('../../../media/appIcon/back.png')} />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>this.props.add_cart(params.product)}>
+                        <TouchableOpacity 
+                        // disabled={true} 
+                        onPress={()=>this.props.add_cart(params.product)}>
                             <Image style={cartStyle} source={require('../../../media/appIcon/cartfull.png')} />
                         </TouchableOpacity>
                     </View>
@@ -96,7 +98,8 @@ const styles = StyleSheet.create({
     },
     cartStyle: {
         width: 25,
-        height: 25
+        height: 25,
+        
     },
     backStyle: {
         width: 25,

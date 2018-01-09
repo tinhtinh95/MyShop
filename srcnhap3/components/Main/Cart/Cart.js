@@ -4,7 +4,7 @@ import {
     Dimensions, StyleSheet, Image, FlatList
 } from 'react-native';
 import { connect } from 'react-redux';
-import { getCart } from '../../../actions/actions';
+import { getCart, add_more, subtract_more, remove_cart, total } from '../../../actions/actions';
 
 
 function toTitleCase(str) {
@@ -22,12 +22,13 @@ class CartView extends Component {
         const { navigator } = this.props;
         navigator.push({ name: 'PRODUCT_DETAIL' });
     }
-    componentDidMount() {
-        // this.props.getCart();
+    async componentDidMount() {
+        await this.props.getCart();
         console.log('ahihi')
     }
+    
     render() {
-        console.log(this.props.listCart);
+        // const total= this.props.total();
         const { main, checkoutButton, checkoutTitle, wrapper,
             product, mainRight, productController,
             txtName, txtPrice, productImage, numberOfProduct,
@@ -43,7 +44,9 @@ class CartView extends Component {
                             <View style={[mainRight]}>
                                 <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
                                     <Text style={txtName}>{toTitleCase('black of the')}</Text>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity
+                                        onPress={() => this.props.remove_cart(item.id)}
+                                    >
                                         <Text style={{ fontFamily: 'Avenir', color: '#969696' }}>X</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -52,16 +55,20 @@ class CartView extends Component {
                                 </View>
                                 <View style={productController}>
                                     <View style={numberOfProduct}>
-                                        <TouchableOpacity>
+                                        <TouchableOpacity
+                                            onPress={() => this.props.add_more(item.id)}
+                                        >
                                             <Text style={{ fontSize: 25 }}>+</Text>
                                         </TouchableOpacity>
                                         <Text style={{ fontSize: 25 }}>{item.quantity}</Text>
-                                        <TouchableOpacity>
+                                        <TouchableOpacity
+                                            onPress={() => this.props.subtract_more(item.id)}
+                                        >
                                             <Text style={{ fontSize: 25 }}>-</Text>
                                         </TouchableOpacity>
                                     </View>
                                     <TouchableOpacity style={showDetailContainer}>
-                                        <Text style={txtShowDetail}>SHOW DETAILS</Text>
+                                        <Text style={txtShowDetail}></Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -69,7 +76,7 @@ class CartView extends Component {
                 >
                 </FlatList>
                 <TouchableOpacity style={checkoutButton}>
-                    <Text style={checkoutTitle}>TOTAL {1000}$ CHECKOUT NOW</Text>
+                    <Text style={checkoutTitle}>TOTAL {this.props.total(this.props.listCart)}  $ CHECKOUT NOW</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -80,7 +87,7 @@ function mapStateToProps(state) {
         listCart: state.listCart,
     }
 }
-export default connect(mapStateToProps, { getCart })(CartView);
+export default connect(mapStateToProps, { getCart, add_more, subtract_more, remove_cart, total })(CartView);
 
 const { width } = Dimensions.get('window');
 const imageWidth = width / 4;
