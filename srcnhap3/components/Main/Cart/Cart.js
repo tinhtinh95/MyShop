@@ -15,28 +15,32 @@ class CartView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            // total: 0
         }
     }
     gotoDetail() {
         const { navigator } = this.props;
         navigator.push({ name: 'PRODUCT_DETAIL' });
     }
-    async componentDidMount() {
-        await this.props.getCart();
-        console.log('ahihi')
+    componentDidMount() {
+        this.props.getCart();
+        console.log('ahihi: ', this.props.listCart)
+        // this.props.total(this.props.listCart);
     }
-    
+
     render() {
-        // const total= this.props.total();
+        const { listCart } = this.props;
+        // const totalAll= this.props.total(this.props.listCart);
+        // console.log({totalAll});
         const { main, checkoutButton, checkoutTitle, wrapper,
             product, mainRight, productController,
             txtName, txtPrice, productImage, numberOfProduct,
             txtShowDetail, showDetailContainer } = styles;
+
         return (
             <View style={wrapper}>
                 <FlatList
-                    data={this.props.listCart}
+                    data={listCart}
                     keyExtractor={(item, index) => item.id}
                     renderItem={({ item }) =>
                         <View style={product}>
@@ -75,8 +79,10 @@ class CartView extends Component {
                         </View>}
                 >
                 </FlatList>
-                <TouchableOpacity style={checkoutButton}>
-                    <Text style={checkoutTitle}>TOTAL {this.props.total(this.props.listCart)}  $ CHECKOUT NOW</Text>
+                <TouchableOpacity style={checkoutButton} onPress={() => this.props.total()}>
+                    <Text style={checkoutTitle}>TOTAL
+                    {this.props.totalAll}
+                        $ CHECKOUT NOW</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -84,10 +90,11 @@ class CartView extends Component {
 }
 function mapStateToProps(state) {
     return {
-        listCart: state.listCart,
+        listCart: state.listCart.arrProduct,
+        // totalAll: state.totalAll,
     }
 }
-export default connect(mapStateToProps, { getCart, add_more, subtract_more, remove_cart, total })(CartView);
+export default connect(mapStateToProps, { getCart, add_more, subtract_more, remove_cart })(CartView);
 
 const { width } = Dimensions.get('window');
 const imageWidth = width / 4;

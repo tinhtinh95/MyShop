@@ -3,15 +3,10 @@ import saveCart from '../api/saveCart';
 import getCart from '../api/getCart';
 import { AsyncStorage } from 'react-native';
 
-const defaultState = [];
-getCart()
-    .then(cartArray => {
-        console.log('cartAraay get: ', cartArray)
-        defaultState = cartArray;
-        // return cartArray;
-        console.log('defaultState get: ', defaultState)
-    }, err => { defaultState = []; }
-    );
+const defaultState = {
+    arrProduct:[],
+    total: 0
+};
 
 
 const reducerCart = (state = defaultState, action) => {
@@ -35,15 +30,15 @@ const reducerCart = (state = defaultState, action) => {
             // //     }
             // }
 
-            state.map(e => {
-                if (e.id !== action.payload.id) {
-                    // console.log('chua co')
-                    check = true;
-                } else {
-                    check = false;
-                    return;
-                }
-            })
+            // state.arrProduct.map(e => {
+            //     if (e.id !== action.payload.id) {
+            //         // console.log('chua co')
+            //         check = true;
+            //     } else {
+            //         check = false;
+            //         return;
+            //     }
+            // })
 
             // state.filter(e => {
             //     if (e.id !== action.payload.id) {
@@ -55,76 +50,70 @@ const reducerCart = (state = defaultState, action) => {
             //     }
             // })
 
-            if (check || state.length === 0) {
-                // console.log('null');
-                state = state.concat(action.payload);
+            if (check || state.arrProduct.length === 0) {
+                
+                return {
+                    ...state,
+                    arrProduct: state.arrProduct.concat(action.payload),
+                }
+                saveCart(state);
                 // check = false;
             } else {
-                state = state.map(e => {
-                    if (e.id !== action.payload.id)
-                        return {
-                            e,
-                        };
-                    return { ...e, quantity: e.quantity + 1 };
-                });
+                return{
+                    ...state,
+                    arrProduct : state.arrProduct.map(e => {
+                        if (e.id !== action.payload.id)
+                            return {
+                                e,
+                            };
+                        return { ...e, quantity: e.quantity + 1 };
+                    })
+                }
             }
 
-            saveCart(state);
-            console.log('sau save');
-            return state;
-        case GET_CART:
+            
+            // console.log('sau save');
+            // return state;
+        // case GET_CART:
 
-            getCart()
-                .then(cartArray => {
-                    console.log('cartAraay get: ', cartArray)
-                    state = cartArray;
-                    console.log('state get: ', state)
-                })
+        //     getCart()
+        //         .then(cartArray => {
+        //             console.log('cartAraay get: ', cartArray)
+        //             state.arrProduct = cartArray;
+        //             console.log('state get: ', state)
+        //         })
 
-            return state;
-        case ADD_MORE:
-            {
-                state = state.map(e => {
-                    if (e.id !== action.id) return e;
-                    return {
-                        ...e, quantity: e.quantity + 1
-                    }
-                })
-                saveCart(state);
-                return state;
-            }
-        case SUBTRACT_MORE:
-            {
-                state = state.map(e => {
-                    if (e.id !== action.id || e.quantity === 1) return e;
-                    return {
-                        ...e, quantity: e.quantity - 1,
-                    }
-                })
-                saveCart(state);
-                return state;
-            }
-        case REMOVE_CART:
-            {
-                state = state.filter(e => {
-                    if (e.id !== action.id) return e;
-                })
-                saveCart(state);
-                return state;
-            }
-        case TOTAL:
-            {
-                // if(action.arr!=''){
-                //     const arrTotal = action.arr.map(e => {
-                //         return e.quantity * e.price;
-                //     })
-                //     const total = arrTotal.reduce((a, b) => a + b);
-                //     return total;
-                // }else{
-                    return 0;
-                // }
-                
-            }
+        //     return state;
+        // case ADD_MORE:
+        //     {
+        //         state.arrProduct = state.arrProduct.map(e => {
+        //             if (e.id !== action.id) return e;
+        //             return {
+        //                 ...e, quantity: e.quantity + 1
+        //             }
+        //         })
+        //         saveCart(state);
+        //         return state;
+        //     }
+        // case SUBTRACT_MORE:
+        //     {
+        //         state.arrProduct = state.arrProduct.map(e => {
+        //             if (e.id !== action.id || e.quantity === 1) return e;
+        //             return {
+        //                 ...e, quantity: e.quantity - 1,
+        //             }
+        //         })
+        //         saveCart(state);
+        //         return state;
+        //     }
+        // case REMOVE_CART:
+        //     {
+        //         state.arrProduct = state.arrProduct.filter(e => {
+        //             if (e.id !== action.id) return e;
+        //         })
+        //         saveCart(state);
+        //         return state;
+        //     }
         default:
             {
                 return state;
