@@ -4,7 +4,7 @@ import reducerCat from './reducerCat';
 import reducerProduct from './reducerProduct';
 import reducerToggleSignIn from './reducerToggleSignIn';
 import reducerCart from './reducerCart';
-import reducerTotal from './reducerTotal';
+import reducerAccount from './reducerAccount';
 
 
 const reducer=combineReducers({
@@ -12,6 +12,6 @@ const reducer=combineReducers({
     listProduct:reducerProduct,
     listCart:reducerCart,
     toggle_signin:reducerToggleSignIn,
-    totalAll:reducerTotal,
+    toggle_account:reducerAccount,
 })
 export default reducer;

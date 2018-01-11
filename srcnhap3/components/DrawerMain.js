@@ -11,6 +11,7 @@ import Auth from './Auth/Auth';
 import Info from './Info/Info';
 import OrderHistory from './OrderHistory/OrderHistory';
 import Main from './Main/Main';
+import {connect} from 'react-redux';
 
 // import {connect} from 'react-redux';
 
