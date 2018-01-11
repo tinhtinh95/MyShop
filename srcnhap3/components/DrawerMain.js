@@ -6,33 +6,53 @@ import {
   Text,
   View, StatusBar
 } from 'react-native';
-import {DrawerNavigator} from 'react-navigation';
+import { DrawerNavigator } from 'react-navigation';
 import Auth from './Auth/Auth';
 import Info from './Info/Info';
 import OrderHistory from './OrderHistory/OrderHistory';
 import Main from './Main/Main';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 // import {connect} from 'react-redux';
 
-const DrawerItem=DrawerNavigator({
-  Home:{screen: Main},
-  Info:{screen: Info},
-  OrderHistory:{screen: OrderHistory},
-  Auth:{screen: Auth},
-  
-}
+// const {toggle_account}=this.props;
+
+const DrawerItemAccount = DrawerNavigator(
+  {
+    Home: { screen: Main },
+    Info: { screen: Info },
+    OrderHistory: { screen: OrderHistory },
+    Auth: { screen: Auth },
+  }
+)
+const DrawerItemUnAccount = DrawerNavigator(
+  {
+    Home: { screen: Main },
+    Auth: { screen: Auth },
+  }
 )
 
-export default class DrawerMain extends React.Component {
+class DrawerMain extends React.Component {
   render() {
+
+    const { toggle_account } = this.props;
     return (
-      <View style={{flex:1,}}>
-        <DrawerItem/>
+      <View style={{ flex: 1, }}>
+        {this.props.toggle_account} ? <Text>ahihi</Text>:<Text>aaaa</Text>
+        {/* <DrawerItemAccount/>:<DrawerItemUnAccount/> */}
       </View>
     );
   }
 }
+function mapStateToProps(state) {
+  return {
+    toggle_account: state.toggle_account,
+  }
+}
+
+
+
+export default connect(mapStateToProps)(DrawerMain);
 
 const styles = StyleSheet.create({
   container: {

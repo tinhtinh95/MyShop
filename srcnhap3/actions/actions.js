@@ -38,6 +38,14 @@ export function toggle_signin() {
     }
 }
 
+
+export function toggle_account() {
+    return {
+        type: types.TOGGLE_ACCOUNT,
+    }
+}
+
+
 export function add_cart(data) {
     return {
         type: types.ADD_CART,
