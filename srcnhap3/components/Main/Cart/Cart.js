@@ -4,7 +4,7 @@ import {
     Dimensions, StyleSheet, Image, FlatList
 } from 'react-native';
 import { connect } from 'react-redux';
-import { getCart, add_more, subtract_more, remove_cart, total } from '../../../actions/actions';
+import { getCart, add_more, subtract_more, remove_cart } from '../../../actions/actions';
 
 
 function toTitleCase(str) {
@@ -15,7 +15,7 @@ class CartView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // total: 0
+            total: 0
         }
     }
     gotoDetail() {
@@ -26,10 +26,26 @@ class CartView extends Component {
         this.props.getCart();
         console.log('ahihi: ', this.props.listCart)
         // this.props.total(this.props.listCart);
+
     }
 
+    // totalTong=(listCart)=>{
+    //     if (listCart != '') {
+    //         const arrTotal = listCart.map(e => {
+    //             return e.quantity * e.price;
+    //         })
+    //         const total = arrTotal.reduce((a, b) => a + b);
+    //         this.setState({total:total})
+    //     } else {
+    //         const total = 0;
+    //     }
+    // }
     render() {
         const { listCart } = this.props;
+        const arrTotal = listCart.map(e => e.quantity * e.price)
+        const total = arrTotal.length ? arrTotal.reduce((a, b) => a + b):0;
+        // this.setState({ total: total })
+
         // const totalAll= this.props.total(this.props.listCart);
         // console.log({totalAll});
         const { main, checkoutButton, checkoutTitle, wrapper,
@@ -79,10 +95,8 @@ class CartView extends Component {
                         </View>}
                 >
                 </FlatList>
-                <TouchableOpacity style={checkoutButton} onPress={() => this.props.total()}>
-                    <Text style={checkoutTitle}>TOTAL
-                    {this.props.totalAll}
-                        $ CHECKOUT NOW</Text>
+                <TouchableOpacity style={checkoutButton} >
+                    <Text style={checkoutTitle}>TOTAL {total}$ CHECKOUT NOW</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -90,8 +104,7 @@ class CartView extends Component {
 }
 function mapStateToProps(state) {
     return {
-        listCart: state.listCart.arrProduct,
-        // totalAll: state.totalAll,
+        listCart: state.listCart,
     }
 }
 export default connect(mapStateToProps, { getCart, add_more, subtract_more, remove_cart })(CartView);

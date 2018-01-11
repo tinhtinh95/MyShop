@@ -69,9 +69,3 @@ export function remove_cart(id) {
         id,
     }
 }
-export function total(data) {
-    return {
-        type: types.TOTAL,
-        arr: data,
-    }
-}
