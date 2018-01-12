@@ -8,35 +8,25 @@ import {
   Image,
   TextInput,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  KeyboardAvoidingView
 } from 'react-native';
 import {connect} from 'react-redux';
 import { toggle_signin } from '../../actions/actions';
-// import {Toggle_SignIn} from '../../actions/actionTypes';
-
+import register from '../../api/register';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 const { width } = Dimensions.get('window');
 class Auth extends React.Component {
+  // componentDidMount(){
+  //   register('tina','nguyen thi tinh', '123')
+  //   .then(res=>console.log(res))
+  // }
+
   render() {
-    
-    const SignIn = (
-      <View style={styles.form}>
-        <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your username' />
-        <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your password' />
-        <TouchableOpacity style={styles.btnSubmit}><Text style={styles.boldText}>Submit</Text></TouchableOpacity>
-      </View>
-    )
-    const SignUp = (
-      <View style={styles.form}>
-        <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your email' />
-        <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your username' />
-        <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your password' />
-        <TextInput underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Re-enter your password' />
-        <TouchableOpacity style={styles.btnSubmit}><Text style={styles.boldText}>Submit</Text></TouchableOpacity>
-      </View>
-    )
     const {isSignIn}=this.props;
-    const showComponent=isSignIn ? SignIn: SignUp;
+    const showComponent=isSignIn ? <SignIn/>: <SignUp/>;
     const title = isSignIn ? 'Sign in' : 'Sign up';
 
     return (
@@ -80,17 +70,6 @@ const styles = StyleSheet.create({
 
     justifyContent: 'space-between',
   },
-  inputStyle: {
-    borderWidth: 1,
-    height: 40,
-    width: width * 0.8,
-    // fontWeight: 'bold',
-    // color: 'black',
-    marginBottom: 10,
-    borderColor: 'black',
-    borderRadius: 20,
-    backgroundColor:'#fff'
-  },
   imgContainer: {
     flex: 1,
     width: '100%',
@@ -116,18 +95,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Arial',
     fontSize: 30
   },
-  form: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  btnSubmit: {
-    backgroundColor: '#00FFCC',
-    width: width * 0.8,
-    alignItems: 'center',
-    borderWidth: 1, height: 40,
-    justifyContent: 'center',
-    borderRadius: 20
-  },
+  
   boldText: {
     fontWeight: 'bold'
   },

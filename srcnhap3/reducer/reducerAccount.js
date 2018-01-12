@@ -1,6 +1,6 @@
 import { TOGGLE_ACCOUNT } from '../actions/actiontypes';
 
-const reducerAccount = (state = true, action) => {
+const reducerAccount = (state = false, action) => {
     switch (action.type) {
         case TOGGLE_ACCOUNT:
             return !state;

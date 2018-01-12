@@ -36,10 +36,11 @@ class DrawerMain extends React.Component {
   render() {
 
     const { toggle_account } = this.props;
+    console.log(toggle_account);
     return (
       <View style={{ flex: 1, }}>
-        {this.props.toggle_account} ? <Text>ahihi</Text>:<Text>aaaa</Text>
-        {/* <DrawerItemAccount/>:<DrawerItemUnAccount/> */}
+        {toggle_account ? <DrawerItemAccount/>:<DrawerItemUnAccount/> }
+        {/* <DrawerItemAccount toggle={toggle_account}/> */}
       </View>
     );
   }
