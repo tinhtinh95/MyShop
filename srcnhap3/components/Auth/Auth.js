@@ -19,10 +19,6 @@ import SignUp from './SignUp';
 
 const { width } = Dimensions.get('window');
 class Auth extends React.Component {
-  // componentDidMount(){
-  //   register('tina','nguyen thi tinh', '123')
-  //   .then(res=>console.log(res))
-  // }
 
   render() {
     const {isSignIn}=this.props;
@@ -30,7 +26,7 @@ class Auth extends React.Component {
     const title = isSignIn ? 'Sign in' : 'Sign up';
 
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container}>
         <View style={styles.imgContainer}>
           <Image
             style={styles.imgStyle}
@@ -52,7 +48,7 @@ class Auth extends React.Component {
           onPress={()=>this.props.toggle_signin()}
           style={!isSignIn ?styles.btnChosenRight: styles.btnNotChosenRight}><Text style={isSignIn ? { color: 'yellow' } :styles.boldText}>Sign up</Text></TouchableOpacity>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

@@ -8,37 +8,61 @@ import {
     Image,
     TextInput,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
+    KeyboardAvoidingView
 } from 'react-native';
-import register from '../../api/register';
+import signin from '../../api/signin';
+import {toggle_account} from '../../actions/actions';
+import {connect} from 'react-redux';
 
 const { width } = Dimensions.get('window');
 
-export default class SignIn extends Component {
-    constructor(props){
+class SignIn extends Component {
+    constructor(props) {
         super(props);
-        this.state={
-            email:'',
-            name:'',
-            password:'',
+        this.state = {
+            email: '',
+            password: '',
         }
     }
+
+    onSignIn = () => {
+        const { email, password } = this.state;
+        signin(email, password)
+            .then(res =>  {this.props.toggle_account()})
+            .catch(err => console.log(err));
+    }
+
     render() {
         return (
-            <View style={styles.form}>
-                <TextInput 
-                value={this.state.name}
-                onChangeText={(text)=> this.setState({name: text})}
-                underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your username' />
+            <KeyboardAvoidingView style={styles.form}>
                 <TextInput
-                value={this.state.password}
-                onChangeText={(text)=> this.setState({password: text})}
-                underlineColorAndroid='transparent' style={styles.inputStyle} placeholderTextColor='#333333' placeholder='Enter your password' />
-                <TouchableOpacity style={styles.btnSubmit}><Text style={styles.boldText}>Submit</Text></TouchableOpacity>
-            </View>
+                    value={this.state.email}
+                    onChangeText={(text) => this.setState({ email: text })}
+                    underlineColorAndroid='transparent'
+                    style={styles.inputStyle}
+                    placeholderTextColor='#333333'
+                    placeholder='Enter your email' />
+                <TextInput
+                    value={this.state.password}
+                    onChangeText={(text) => this.setState({ password: text })}
+                    underlineColorAndroid='transparent'
+                    style={styles.inputStyle}
+                    placeholderTextColor='#333333'
+                    placeholder='Enter your password'
+                    secureTextEntry={true}
+                />
+                <TouchableOpacity
+                    onPress={this.onSignIn}
+                    style={styles.btnSubmit}>
+                    <Text style={styles.boldText}>Submit</Text>
+                </TouchableOpacity>
+            </KeyboardAvoidingView>
         )
     }
 }
+
+export default connect(null, {toggle_account})(SignIn);
 
 const styles = StyleSheet.create({
     container: {

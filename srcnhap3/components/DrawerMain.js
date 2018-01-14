@@ -4,18 +4,16 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View, StatusBar
+  View, StatusBar, ScrollView
 } from 'react-native';
-import { DrawerNavigator } from 'react-navigation';
+import { DrawerNavigator, DrawerItems } from 'react-navigation';
 import Auth from './Auth/Auth';
 import Info from './Info/Info';
 import OrderHistory from './OrderHistory/OrderHistory';
 import Main from './Main/Main';
 import { connect } from 'react-redux';
 
-// import {connect} from 'react-redux';
 
-// const {toggle_account}=this.props;
 
 const DrawerItemAccount = DrawerNavigator(
   {
@@ -23,12 +21,65 @@ const DrawerItemAccount = DrawerNavigator(
     Info: { screen: Info },
     OrderHistory: { screen: OrderHistory },
     Auth: { screen: Auth },
+  },
+  {
+    contentOptions: {
+      activeTintColor: 'red',
+      style: {
+        marginVertical: 100,
+      }
+    }
   }
 )
 const DrawerItemUnAccount = DrawerNavigator(
+
   {
     Home: { screen: Main },
     Auth: { screen: Auth },
+  },
+  {
+    // contentOptions: {
+    //   activeTintColor: '#e91e63',
+    //   itemsContainerStyle: {
+    //     marginVertical: 0,
+    //   },
+    //   iconContainerStyle: {
+    //     opacity: 1
+    //   },
+    //   paddingTop:40,
+    // },
+    drawerBackgroundColor: '#34B080',
+    useNativeAnimations: true,
+    contentComponent: (props) => (
+      <View style={{ marginTop: 100,}}>
+        <ScrollView>
+          <DrawerItems
+            {...props}
+            getLabel={(scene) => (
+              <View style={{
+                backgroundColor: 'white',
+                borderWidth: 1,
+                borderColor: 'pink',
+                padding: 10,
+                margin: 10,
+                width:'90%',
+                borderRadius:10,
+                justifyContent:'center',
+                alignItems:'center'
+              }}>
+                <Text style={styles.buttonText}>{props.getLabel(scene)}</Text>
+              </View>
+            )}
+          />
+        </ScrollView>
+      </View>
+    )
+
+  },
+  {
+    contentComponent: ({ navigation }) => (
+      <Drawer navigation={navigation} />
+    ),
   }
 )
 
@@ -38,8 +89,9 @@ class DrawerMain extends React.Component {
     const { toggle_account } = this.props;
     console.log(toggle_account);
     return (
-      <View style={{ flex: 1, }}>
-        {toggle_account ? <DrawerItemAccount/>:<DrawerItemUnAccount/> }
+      <View style={{ flex: 1, backgroundColor: '#ed6c5d' }}>
+
+        {toggle_account ? <DrawerItemAccount /> : <DrawerItemUnAccount />}
         {/* <DrawerItemAccount toggle={toggle_account}/> */}
       </View>
     );

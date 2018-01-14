@@ -9,7 +9,8 @@ import {
   TextInput,
   Dimensions,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Alert
 } from 'react-native';
 import { connect } from 'react-redux';
 import { toggle_signin } from '../../actions/actions';
@@ -17,7 +18,7 @@ import register from '../../api/register';
 
 const { width } = Dimensions.get('window');
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,11 +28,37 @@ export default class SignUp extends Component {
       rePassword: '',
     }
   }
+ 
+  onSucess=()=>{
+    Alert.alert(
+      'Notice',
+      'Sign In successfully',
+      [
+        {text: 'OK', onPress: () => {this.props.toggle_signin()}}, // {this.props.toggle_signin()}
+      ],
+      { cancelable: false }
+    )
+  }
+  onFail=()=>{
+    Alert.alert(
+      'Notice',
+      'The email has been existed',
+      [
+        {text: 'OK', onPress: () => console.log('OK Pressed')},
+      ],
+      { cancelable: false }
+    )
+  }
+
   registerUser=()=>{
     const {email, name, password}=this.state;
     register(email,name,password)
-    .then(res=>console.log(res))
+    .then(res=>{
+      if(res ==='THANH_CONG') return this.onSucess();
+      return this.onFail();
+    })
   }
+
   render() {
     return (
       <KeyboardAvoidingView style={styles.form}>
@@ -60,7 +87,7 @@ export default class SignUp extends Component {
     )
   }
 }
-
+export default connect(null,{toggle_signin})(SignUp);
 
 const styles = StyleSheet.create({
   container: {
