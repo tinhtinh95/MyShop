@@ -1,4 +1,4 @@
-const BASE_URL = 'http://192.168.1.31/api/';
+const BASE_URL = 'http://localhost/api/';
 
 const API = {
     getList(name) {

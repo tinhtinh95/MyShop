@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "397418390154",
+    "firebase_url": "https://themoviestore-6749c.firebaseio.com",
+    "project_id": "themoviestore-6749c",
+    "storage_bucket": "themoviestore-6749c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:397418390154:android:105e93a902f50caf",
+        "android_client_info": {
+          "package_name": "com.themoviestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "397418390154-q1vj067fsi08atec3fd1of3ivfh5et27.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdSmNMeeegUGei3Tt0q9zG-O6N_vWltjE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
